@@ -29,6 +29,7 @@
 		7D6C20362816275000B7739B /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6C20342816275000B7739B /* TableViewCell.xib */; };
 		7D6C203828162B3D00B7739B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C203728162B3D00B7739B /* MainViewController.swift */; };
 		7D6C203A281631B700B7739B /* PackingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C2039281631B700B7739B /* PackingListViewController.swift */; };
+		7D6C203C2816E94200B7739B /* TripDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C203B2816E94200B7739B /* TripDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		7D6C20342816275000B7739B /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		7D6C203728162B3D00B7739B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7D6C2039281631B700B7739B /* PackingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingListViewController.swift; sourceTree = "<group>"; };
+		7D6C203B2816E94200B7739B /* TripDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsViewController.swift; sourceTree = "<group>"; };
 		D7831C81D42401BD22699454 /* Pods-Easy Travels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easy Travels.release.xcconfig"; path = "Target Support Files/Pods-Easy Travels/Pods-Easy Travels.release.xcconfig"; sourceTree = "<group>"; };
 		DFC6F2ADBC9260B02C1D9348 /* Pods_Easy_Travels.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Easy_Travels.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -128,6 +130,7 @@
 				7D6C202E2816075200B7739B /* SideMenuViewController.swift */,
 				7D6C203728162B3D00B7739B /* MainViewController.swift */,
 				7D6C2039281631B700B7739B /* PackingListViewController.swift */,
+				7D6C203B2816E94200B7739B /* TripDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				7D6C20212815AB0900B7739B /* WelcomeViewController.swift in Sources */,
 				7D69C31C280652C600D40B71 /* LoginViewController.swift in Sources */,
 				7D6C202F2816075200B7739B /* SideMenuViewController.swift in Sources */,
+				7D6C203C2816E94200B7739B /* TripDetailsViewController.swift in Sources */,
 				7D6C20352816275000B7739B /* TableViewCell.swift in Sources */,
 				7D6C20252815C9A100B7739B /* TripSelectorViewController.swift in Sources */,
 				7D69C318280652C600D40B71 /* AppDelegate.swift in Sources */,

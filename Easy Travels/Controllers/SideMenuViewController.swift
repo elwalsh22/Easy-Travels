@@ -1,7 +1,7 @@
 //
 //  SideMenuViewController.swift
 //  Easy Travels
-//
+//  Attribution: johncodeos.com tutorial on side menus
 //  Created by Ella Walsh on 4/24/22.
 //
 
@@ -31,7 +31,7 @@ class SideMenuViewController: UIViewController {
         // TableView
                 self.sideMenuTableView.delegate = self
                 self.sideMenuTableView.dataSource = self
-                self.sideMenuTableView.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+                self.sideMenuTableView.backgroundColor = #colorLiteral(red: 0.2612557411, green: 0.3280342221, blue: 0.2743004858, alpha: 1)
                 self.sideMenuTableView.separatorStyle = .none
 
                 // Set Highlighted Cell
@@ -84,7 +84,7 @@ extension SideMenuViewController: UITableViewDataSource {
 
         // Highlighted color
         let myCustomSelectionColorView = UIView()
-        myCustomSelectionColorView.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+        myCustomSelectionColorView.backgroundColor = #colorLiteral(red: 0.2612557411, green: 0.3280342221, blue: 0.2743004858, alpha: 1)
         cell.selectedBackgroundView = myCustomSelectionColorView
         return cell
     }

@@ -1,7 +1,7 @@
 //
 //  MainViewController.swift
 //  Easy Travels
-//
+//  Attribution: johncodeos.com tutorial on side menus
 //  Created by Ella Walsh on 4/24/22.
 //
 

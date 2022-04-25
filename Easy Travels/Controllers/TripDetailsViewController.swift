@@ -1,20 +1,18 @@
 //
-//  UsersViewController.swift
+//  TripDetailsViewController.swift
 //  Easy Travels
 //
-//  Created by Ella Walsh on 4/24/22.
+//  Created by Ella Walsh on 4/25/22.
 //
 
 import UIKit
 
-class UsersViewController: UIViewController {
+class TripDetailsViewController: UIViewController {
 
-    @IBOutlet weak var sideMenuBtn: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        sideMenuBtn.target = revealViewController()
-                sideMenuBtn.action = #selector(revealViewController()?.revealSideMenu)
+        // Do any additional setup after loading the view.
     }
     
 
