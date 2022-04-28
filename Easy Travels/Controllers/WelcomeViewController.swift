@@ -8,9 +8,12 @@
 import UIKit
 
 class WelcomeViewController: UIViewController {
+    
+    var trips: Trips!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        trips = Trips()
 
         // Do any additional setup after loading the view.
     }

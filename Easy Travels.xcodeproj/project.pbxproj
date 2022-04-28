@@ -30,6 +30,17 @@
 		7D6C203828162B3D00B7739B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C203728162B3D00B7739B /* MainViewController.swift */; };
 		7D6C203A281631B700B7739B /* PackingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C2039281631B700B7739B /* PackingListViewController.swift */; };
 		7D6C203C2816E94200B7739B /* TripDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C203B2816E94200B7739B /* TripDetailsViewController.swift */; };
+		7D6C203E2817431C00B7739B /* TravelUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C203D2817431C00B7739B /* TravelUsers.swift */; };
+		7D6C20402817444400B7739B /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C203F2817444400B7739B /* Trip.swift */; };
+		7D6C20422817444F00B7739B /* Trips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C20412817444F00B7739B /* Trips.swift */; };
+		7D6C20442817447000B7739B /* PackingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C20432817447000B7739B /* PackingItem.swift */; };
+		7D6C20462817448000B7739B /* PackingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C20452817447F00B7739B /* PackingItems.swift */; };
+		7D6C204828175CFA00B7739B /* PackingItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C204728175CFA00B7739B /* PackingItemsTableViewCell.swift */; };
+		7D6C204A2818BAC900B7739B /* UIViewController+alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C20492818BAC900B7739B /* UIViewController+alert.swift */; };
+		7D6C204E2819801400B7739B /* PackingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C204D2819801400B7739B /* PackingDetailViewController.swift */; };
+		7D6C20502819F7EE00B7739B /* TripDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C204F2819F7EE00B7739B /* TripDetailsTableViewCell.swift */; };
+		7D6C2052281A2BFF00B7739B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C2051281A2BFF00B7739B /* Location.swift */; };
+		7D6C2054281A2C0C00B7739B /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C2053281A2C0C00B7739B /* Locations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +69,17 @@
 		7D6C203728162B3D00B7739B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7D6C2039281631B700B7739B /* PackingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingListViewController.swift; sourceTree = "<group>"; };
 		7D6C203B2816E94200B7739B /* TripDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsViewController.swift; sourceTree = "<group>"; };
+		7D6C203D2817431C00B7739B /* TravelUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelUsers.swift; sourceTree = "<group>"; };
+		7D6C203F2817444400B7739B /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		7D6C20412817444F00B7739B /* Trips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trips.swift; sourceTree = "<group>"; };
+		7D6C20432817447000B7739B /* PackingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingItem.swift; sourceTree = "<group>"; };
+		7D6C20452817447F00B7739B /* PackingItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingItems.swift; sourceTree = "<group>"; };
+		7D6C204728175CFA00B7739B /* PackingItemsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingItemsTableViewCell.swift; sourceTree = "<group>"; };
+		7D6C20492818BAC900B7739B /* UIViewController+alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+alert.swift"; sourceTree = "<group>"; };
+		7D6C204D2819801400B7739B /* PackingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingDetailViewController.swift; sourceTree = "<group>"; };
+		7D6C204F2819F7EE00B7739B /* TripDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		7D6C2051281A2BFF00B7739B /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		7D6C2053281A2C0C00B7739B /* Locations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
 		D7831C81D42401BD22699454 /* Pods-Easy Travels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easy Travels.release.xcconfig"; path = "Target Support Files/Pods-Easy Travels/Pods-Easy Travels.release.xcconfig"; sourceTree = "<group>"; };
 		DFC6F2ADBC9260B02C1D9348 /* Pods_Easy_Travels.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Easy_Travels.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -108,6 +130,7 @@
 				7D6C201F2815A91100B7739B /* Controllers */,
 				7D6C20322816272B00B7739B /* Models */,
 				7D69C31D280652C600D40B71 /* Main.storyboard */,
+				7D6C20492818BAC900B7739B /* UIViewController+alert.swift */,
 				7D69C320280652CE00D40B71 /* Assets.xcassets */,
 				7D69C322280652CE00D40B71 /* LaunchScreen.storyboard */,
 				7D69C325280652CE00D40B71 /* Info.plist */,
@@ -130,6 +153,7 @@
 				7D6C202E2816075200B7739B /* SideMenuViewController.swift */,
 				7D6C203728162B3D00B7739B /* MainViewController.swift */,
 				7D6C2039281631B700B7739B /* PackingListViewController.swift */,
+				7D6C204D2819801400B7739B /* PackingDetailViewController.swift */,
 				7D6C203B2816E94200B7739B /* TripDetailsViewController.swift */,
 			);
 			path = Controllers;
@@ -139,9 +163,18 @@
 			isa = PBXGroup;
 			children = (
 				7D6C201D2815A40900B7739B /* TravelUser.swift */,
+				7D6C203D2817431C00B7739B /* TravelUsers.swift */,
+				7D6C203F2817444400B7739B /* Trip.swift */,
+				7D6C20412817444F00B7739B /* Trips.swift */,
+				7D6C20432817447000B7739B /* PackingItem.swift */,
+				7D6C20452817447F00B7739B /* PackingItems.swift */,
+				7D6C2051281A2BFF00B7739B /* Location.swift */,
+				7D6C2053281A2C0C00B7739B /* Locations.swift */,
 				7D6C20302816266000B7739B /* SideMenuModel.swift */,
 				7D6C20332816275000B7739B /* TableViewCell.swift */,
 				7D6C20342816275000B7739B /* TableViewCell.xib */,
+				7D6C204728175CFA00B7739B /* PackingItemsTableViewCell.swift */,
+				7D6C204F2819F7EE00B7739B /* TripDetailsTableViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -290,22 +323,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D6C20422817444F00B7739B /* Trips.swift in Sources */,
 				7D6C202D2816064500B7739B /* TripsViewController.swift in Sources */,
 				7D6C201E2815A40900B7739B /* TravelUser.swift in Sources */,
+				7D6C20442817447000B7739B /* PackingItem.swift in Sources */,
 				7D6C203A281631B700B7739B /* PackingListViewController.swift in Sources */,
 				7D6C20212815AB0900B7739B /* WelcomeViewController.swift in Sources */,
 				7D69C31C280652C600D40B71 /* LoginViewController.swift in Sources */,
 				7D6C202F2816075200B7739B /* SideMenuViewController.swift in Sources */,
+				7D6C203E2817431C00B7739B /* TravelUsers.swift in Sources */,
 				7D6C203C2816E94200B7739B /* TripDetailsViewController.swift in Sources */,
+				7D6C2054281A2C0C00B7739B /* Locations.swift in Sources */,
 				7D6C20352816275000B7739B /* TableViewCell.swift in Sources */,
 				7D6C20252815C9A100B7739B /* TripSelectorViewController.swift in Sources */,
+				7D6C204828175CFA00B7739B /* PackingItemsTableViewCell.swift in Sources */,
+				7D6C2052281A2BFF00B7739B /* Location.swift in Sources */,
+				7D6C20502819F7EE00B7739B /* TripDetailsTableViewCell.swift in Sources */,
+				7D6C20402817444400B7739B /* Trip.swift in Sources */,
 				7D69C318280652C600D40B71 /* AppDelegate.swift in Sources */,
+				7D6C204A2818BAC900B7739B /* UIViewController+alert.swift in Sources */,
 				7D6C20292816062A00B7739B /* HomeViewController.swift in Sources */,
 				7D6C203828162B3D00B7739B /* MainViewController.swift in Sources */,
+				7D6C20462817448000B7739B /* PackingItems.swift in Sources */,
 				7D6C20232815C8CB00B7739B /* LocationSelectorViewController.swift in Sources */,
 				7D6C202B2816063900B7739B /* UsersViewController.swift in Sources */,
 				7D6C20272815D8FB00B7739B /* APIKeys.swift in Sources */,
 				7D69C31A280652C600D40B71 /* SceneDelegate.swift in Sources */,
+				7D6C204E2819801400B7739B /* PackingDetailViewController.swift in Sources */,
 				7D6C20312816266000B7739B /* SideMenuModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

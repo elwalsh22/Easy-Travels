@@ -41,8 +41,10 @@ class LoginViewController: UIViewController {
             travelUser.saveIfNewUser { success in
                 if success {
                     self.performSegue(withIdentifier: "FirstShowSegue", sender: nil)
+                    //TODO: switch the segues once everything works
+                    //self.performSegue(withIdentifier: "LogintoMain", sender: nil)
                 } else {
-                    print("error: tried to save a new travel but failed")
+                    print("error: tried to save a new user but failed")
                 }
             }
             performSegue(withIdentifier: "FirstShowSegue", sender: nil)
@@ -90,6 +92,7 @@ class LoginViewController: UIViewController {
             loginViewController.view.addSubview(logoImageView) // Add ImageView to the login controller's main view
             return loginViewController
         }
+        
         
     
 

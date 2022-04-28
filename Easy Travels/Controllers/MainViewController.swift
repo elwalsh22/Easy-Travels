@@ -7,8 +7,10 @@
 
 import UIKit
 
+
 class MainViewController: UIViewController {
     
+  
     private var sideMenuShadowView: UIView!
 
     private var sideMenuViewController: SideMenuViewController!
@@ -23,6 +25,8 @@ class MainViewController: UIViewController {
 
         override public func viewDidLoad() {
             super.viewDidLoad()
+            
+           
             self.view.backgroundColor = #colorLiteral(red: 0.737254902, green: 0.1294117647, blue: 0.2941176471, alpha: 1)
 
             // Shadow Background View
@@ -69,6 +73,7 @@ class MainViewController: UIViewController {
            showViewController(viewController: UINavigationController.self, storyboardId: "HomeNavID")
          
         }
+   
     
     @IBAction open func revealSideMenu() {
         self.sideMenuState(expanded: self.isExpanded ? false : true)
@@ -193,3 +198,4 @@ extension MainViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
+
