@@ -1,35 +1,16 @@
 //
-//  TravelUser.swift
+//  Friend.swift
 //  Easy Travels
 //
-//  Created by Ella Walsh on 4/24/22.
+//  Created by Ella Walsh on 4/28/22.
 //
-
 
 import Foundation
 import Firebase
 
-class TravelUser {
+class Friend: TravelUser {
     
-    var email: String
-    var displayName: String
-    var photoURL: String
-    var userSince: Date
-    var documentID: String
-    
-    
-    var dictionary: [String: Any] {
-        let timeIntervalDate = userSince.timeIntervalSince1970
-        return ["email": email, "displayName": displayName,"photoURL": photoURL,  "userSince": timeIntervalDate]
-    }
-    
-    init(email: String, displayName: String, photoURL: String, userSince: Date, documentID: String) {
-        self.email = email
-        self.displayName = displayName
-        self.photoURL = photoURL
-        self.userSince = userSince
-        self.documentID = documentID
-    }
+   
     
     convenience init(user: User) {
         let email = user.email ?? ""
@@ -50,9 +31,9 @@ class TravelUser {
         
     }
     
-    func saveIfNewUser(completion: @escaping (Bool) -> ()) {
+    func saveIfNewUser(user: TravelUser, completion: @escaping (Bool) -> ()) {
         let db = Firestore.firestore()
-        let userRef = db.collection("users").document(documentID)
+        let userRef = db.collection("users").document(user.documentID).collection("friends").document(documentID)
         userRef.getDocument { document, error in
             guard error == nil else {
                 print("Error cannout access document")
@@ -65,7 +46,7 @@ class TravelUser {
             //create new document
             
             let dataToSave: [String: Any] = self.dictionary
-            db.collection("users").document(self.documentID).setData(dataToSave) { (error) in
+            db.collection("users").document(user.documentID).collection("friends").document(self.documentID).setData(dataToSave) { (error) in
                 guard error == nil else {
                     print("Error \(error!.localizedDescription)")
                     return completion(false)
@@ -75,6 +56,4 @@ class TravelUser {
         }
     }
 }
-
-
 

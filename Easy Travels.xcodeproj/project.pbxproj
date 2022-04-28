@@ -41,6 +41,9 @@
 		7D6C20502819F7EE00B7739B /* TripDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C204F2819F7EE00B7739B /* TripDetailsTableViewCell.swift */; };
 		7D6C2052281A2BFF00B7739B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C2051281A2BFF00B7739B /* Location.swift */; };
 		7D6C2054281A2C0C00B7739B /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C2053281A2C0C00B7739B /* Locations.swift */; };
+		7D6C2056281AA53D00B7739B /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C2055281AA53D00B7739B /* Friend.swift */; };
+		7D6C2058281AA54800B7739B /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C2057281AA54800B7739B /* Friends.swift */; };
+		7D6C205A281AA86300B7739B /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C2059281AA86300B7739B /* AddFriendViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +83,9 @@
 		7D6C204F2819F7EE00B7739B /* TripDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		7D6C2051281A2BFF00B7739B /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7D6C2053281A2C0C00B7739B /* Locations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
+		7D6C2055281AA53D00B7739B /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		7D6C2057281AA54800B7739B /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
+		7D6C2059281AA86300B7739B /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		D7831C81D42401BD22699454 /* Pods-Easy Travels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easy Travels.release.xcconfig"; path = "Target Support Files/Pods-Easy Travels/Pods-Easy Travels.release.xcconfig"; sourceTree = "<group>"; };
 		DFC6F2ADBC9260B02C1D9348 /* Pods_Easy_Travels.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Easy_Travels.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -155,6 +161,7 @@
 				7D6C2039281631B700B7739B /* PackingListViewController.swift */,
 				7D6C204D2819801400B7739B /* PackingDetailViewController.swift */,
 				7D6C203B2816E94200B7739B /* TripDetailsViewController.swift */,
+				7D6C2059281AA86300B7739B /* AddFriendViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -164,6 +171,8 @@
 			children = (
 				7D6C201D2815A40900B7739B /* TravelUser.swift */,
 				7D6C203D2817431C00B7739B /* TravelUsers.swift */,
+				7D6C2055281AA53D00B7739B /* Friend.swift */,
+				7D6C2057281AA54800B7739B /* Friends.swift */,
 				7D6C203F2817444400B7739B /* Trip.swift */,
 				7D6C20412817444F00B7739B /* Trips.swift */,
 				7D6C20432817447000B7739B /* PackingItem.swift */,
@@ -336,6 +345,7 @@
 				7D6C2054281A2C0C00B7739B /* Locations.swift in Sources */,
 				7D6C20352816275000B7739B /* TableViewCell.swift in Sources */,
 				7D6C20252815C9A100B7739B /* TripSelectorViewController.swift in Sources */,
+				7D6C2058281AA54800B7739B /* Friends.swift in Sources */,
 				7D6C204828175CFA00B7739B /* PackingItemsTableViewCell.swift in Sources */,
 				7D6C2052281A2BFF00B7739B /* Location.swift in Sources */,
 				7D6C20502819F7EE00B7739B /* TripDetailsTableViewCell.swift in Sources */,
@@ -343,6 +353,7 @@
 				7D69C318280652C600D40B71 /* AppDelegate.swift in Sources */,
 				7D6C204A2818BAC900B7739B /* UIViewController+alert.swift in Sources */,
 				7D6C20292816062A00B7739B /* HomeViewController.swift in Sources */,
+				7D6C205A281AA86300B7739B /* AddFriendViewController.swift in Sources */,
 				7D6C203828162B3D00B7739B /* MainViewController.swift in Sources */,
 				7D6C20462817448000B7739B /* PackingItems.swift in Sources */,
 				7D6C20232815C8CB00B7739B /* LocationSelectorViewController.swift in Sources */,
@@ -351,6 +362,7 @@
 				7D69C31A280652C600D40B71 /* SceneDelegate.swift in Sources */,
 				7D6C204E2819801400B7739B /* PackingDetailViewController.swift in Sources */,
 				7D6C20312816266000B7739B /* SideMenuModel.swift in Sources */,
+				7D6C2056281AA53D00B7739B /* Friend.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

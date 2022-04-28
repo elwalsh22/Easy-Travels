@@ -59,11 +59,17 @@ class TripSelectorViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        updateFromInterface()   
         if segue.identifier == "ShowLocationSelector" {
             let destination = segue.destination as! LocationSelectorViewController
             print("in the prepare for segue, the trip doc id is \(self.trip.documentID) .")
             destination.trip = self.trip
         }
+    }
+    
+    func updateFromInterface() {
+        trip.departureDate = departureDatePicker.date
+        trip.returnDate = returnDatePicker.date
     }
     
     

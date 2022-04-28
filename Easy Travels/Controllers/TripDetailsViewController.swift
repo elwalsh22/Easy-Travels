@@ -14,9 +14,10 @@ class TripDetailsViewController: UIViewController {
     
     var trip: Trip!
     var items: PackingItems!
+    var users: TravelUsers!
     
     var locations: Locations!
-    var friends: TravelUsers!
+    var friends: Friends!
     
     var nSelectedSegmentIndex : Int = 1
     
@@ -37,8 +38,14 @@ class TripDetailsViewController: UIViewController {
         
         setupMapView()
         updateUserInterface()
+        itemsTableView.delegate = self
+        itemsTableView.dataSource = self
         locations = Locations()
-        friends = TravelUsers()
+        friends = Friends()
+        users = TravelUsers()
+        friends.loadData {
+            self.itemsTableView.reloadData()
+        }
         
     }
     
@@ -56,6 +63,10 @@ class TripDetailsViewController: UIViewController {
     @IBAction func addButtonPressed(_ sender: UIButton) {
         if self.nSelectedSegmentIndex == 1 {
             performSegue(withIdentifier: "AddItemFromTripDetails", sender: sender)
+            
+        } else if self.nSelectedSegmentIndex == 3 {
+                performSegue(withIdentifier: "AddFriend", sender: sender)
+        
         }
         
     }
@@ -84,6 +95,11 @@ class TripDetailsViewController: UIViewController {
             let destination = navigationController.viewControllers.first as! PackingDetailViewController
             destination.trip = trip
             destination.items = items
+            
+        case "AddFriend":
+            let navigationController = segue.destination as! UINavigationController
+            let destination = navigationController.viewControllers.first as! AddFriendViewController
+            destination.users = users
         default:
             print("error")
             

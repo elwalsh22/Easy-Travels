@@ -17,7 +17,7 @@ class Trips {
     }
     
     func loadData(completed: @escaping () -> ()) {
-        db.collection("trip").addSnapshotListener { (querySnapshot, error) in
+        db.collection("trips").addSnapshotListener { (querySnapshot, error) in
             guard error == nil else {
                 print("error: adding the snapshot listener \(error!.localizedDescription)")
                 return completed()

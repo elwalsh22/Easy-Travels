@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuthUI
 import FirebaseGoogleAuthUI
+import SDWebImage
 
 protocol SideMenuViewControllerDelegate {
     func selectedCell(_ row: Int)
@@ -34,6 +35,17 @@ class SideMenuViewController: UIViewController {
         authUI = FUIAuth.defaultAuthUI()
         // You need to adopt a FUIAuthDelegate protocol to receive callback
         authUI.delegate = self
+        guard let currentUser = authUI.auth?.currentUser else {
+            print("Error")
+            return
+        }
+      
+        nameLabel.text = currentUser.displayName
+        guard let url =  currentUser.photoURL else {
+            self.imageView.image = UIImage(systemName: "person.crop.circle")
+            return
+        }
+        imageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "person.crop.circle"))
 
         // TableView
                 self.sideMenuTableView.delegate = self
