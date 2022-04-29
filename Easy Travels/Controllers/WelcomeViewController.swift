@@ -10,17 +10,24 @@ import UIKit
 class WelcomeViewController: UIViewController {
     
     var trips: Trips!
+    var user: TravelUser!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         trips = Trips()
+        
 
-        // Do any additional setup after loading the view.
     }
     
-    //@IBAction func nextButtonPressed(_ sender: UIButton) {
-     //   performSegue(withIdentifier: "ShowTripSelector", sender: sender)
-  //  }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowTripSelector" {
+            let destination = segue.destination as! TripSelectorViewController
+            destination.user = self.user
+            print("welcome controller user is \(user.documentID ?? "error")")
+        }
+    }
+    
+   
     
     
     }

@@ -40,6 +40,7 @@ class HomeViewController: UIViewController {
             print("Error")
             return
         }
+        user = TravelUser(user: currentUser)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -47,7 +48,7 @@ class HomeViewController: UIViewController {
         
      
         trips = Trips()
-        trips.loadData {
+        trips.loadData(user: user) {
             self.tableView.reloadData()
             
             if self.trips.tripArray.count == 0 {
@@ -60,18 +61,23 @@ class HomeViewController: UIViewController {
             self.daysLabel.text = "\(formatter.string(from: delta) ?? "")"
             self.locationLabel.text = self.trips.tripArray[0].name
             
-            
-            
         }
-        
-       
-        
         
         
         sideMenuBtn.target = revealViewController()
         sideMenuBtn.action = #selector(revealViewController()?.revealSideMenu)
         
-        
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowTripDetails" {
+        let destination = segue.destination as! TripDetailsViewController
+            let selectedIndexPath = tableView.indexPathForSelectedRow?.row ?? 0
+            print(trips.tripArray[selectedIndexPath].name)
+            destination.trip = trips.tripArray[selectedIndexPath]
+        destination.user = user
+    }
     }
     
     

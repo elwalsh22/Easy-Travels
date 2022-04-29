@@ -48,14 +48,14 @@ class PackingItem {
         self.init(itemName: "",  quantity: 0, isPacked: false, itemUserID: itemUserID , documentID: "")
     }
     
-    func saveData(trip: Trip, completed: @escaping (Bool) -> ()) {
+    func saveData(user: TravelUser, trip: Trip, completed: @escaping (Bool) -> ()) {
         
         let db = Firestore.firestore()
         let dataToSave: [String: Any] = self.dictionary
         
         if self.documentID == "" {
             var ref: DocumentReference? = nil
-            ref = db.collection("trips").document(trip.documentID).collection("items").addDocument(data: dataToSave) {
+            ref = db.collection("users").document(user.documentID).collection("trips").document(trip.documentID).collection("items").addDocument(data: dataToSave) {
                 (error) in guard error == nil else {
                     print("😡Error adding document \(error!.localizedDescription)")
                     return completed(false)
@@ -67,7 +67,7 @@ class PackingItem {
             
             
         } else {
-            let ref = db.collection("trips").document(trip.documentID).collection("items").document(self.documentID)
+            let ref = db.collection("users").document(user.documentID).collection("trips").document(trip.documentID).collection("items").document(self.documentID)
             ref.setData(dataToSave) {
                 (error) in guard error == nil else {
                     print("😡Error updating document \(error!.localizedDescription)")

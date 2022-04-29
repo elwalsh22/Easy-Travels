@@ -17,6 +17,7 @@ class LocationSelectorViewController: UIViewController {
     
     var location: GMSPlace!
     var trip: Trip!
+    var user: TravelUser!
     let regionDistance: CLLocationDegrees = 2000.0
     var locationManager: CLLocationManager!
     
@@ -25,6 +26,9 @@ class LocationSelectorViewController: UIViewController {
         
         if trip == nil {
             trip = Trip()
+        }
+        if user == nil {
+
         }
         setupMapView()
         updateUserInterface()
@@ -57,12 +61,13 @@ class LocationSelectorViewController: UIViewController {
         if segue.identifier == "ShowPackingList" {
             let destination = segue.destination as! PackingListViewController
             destination.trip = trip
+            destination.user = user
         }
     }
     
     @IBAction func packingButtonPressed(_ sender: UIButton) {
         print("before the save \(trip.documentID)")
-        trip.saveData { success in
+        trip.saveData(user: user) { success in
             if success {
                 self.performSegue(withIdentifier: "ShowPackingList", sender: sender)
                 print("LocationSaved")

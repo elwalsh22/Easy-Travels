@@ -315,7 +315,7 @@
                                     <action selector="packingButtonPressed:" destination="jQA-Xk-9N7" eventType="touchUpInside" id="kW6-0X-7ul"/>
                                 </connections>
                             </button>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="x4Z-Tl-zJV">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x4Z-Tl-zJV">
                                 <rect key="frame" x="24" y="115" width="272" height="224"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
@@ -350,7 +350,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ucT-pH-c9Q">
-                                <rect key="frame" x="0.0" y="44" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="100" width="320" height="399"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="BackgroundColor"/>
                                 <color key="separatorColor" name="Color1"/>
@@ -384,11 +384,25 @@
                                         <connections>
                                             <outlet property="itemLabel" destination="R3b-hI-5Hc" id="j3T-4e-Evr"/>
                                             <outlet property="qtyLabel" destination="ib6-im-gO2" id="zjk-rZ-QdX"/>
-                                            <segue destination="Icb-mw-PZg" kind="show" identifier="ShowItem" id="atN-AI-32V"/>
+                                            <segue destination="Icb-mw-PZg" kind="show" identifier="ShowItem" id="QhL-o3-fe0"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Packing List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dt9-UV-RNP">
+                                <rect key="frame" x="107" y="44" width="106" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                <color key="textColor" name="Color3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="press the + to get started" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xrG-dt-TPe">
+                                <rect key="frame" x="75" y="71" width="170" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Italic" family="Avenir Next" pointSize="15"/>
+                                <color key="textColor" name="Color3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EHS-F8-I1T"/>
                         <color key="backgroundColor" name="BackgroundColor"/>
@@ -405,7 +419,7 @@
                     <navigationItem key="navigationItem" id="Aj3-hg-pUI">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="D9P-LB-lSh">
                             <connections>
-                                <segue destination="7ZN-ed-NBk" kind="show" identifier="ShowTripDetails" id="sNe-Jj-XDz"/>
+                                <segue destination="7ZN-ed-NBk" kind="show" identifier="ShowTripDetails" id="bbX-x6-I4m"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -418,7 +432,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tfi-s0-Gib" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1579" y="2788"/>
+            <point key="canvasLocation" x="1578.75" y="2787.676056338028"/>
         </scene>
         <!--Packing Detail View Controller-->
         <scene sceneID="HXb-2J-t94">
@@ -489,11 +503,6 @@
                         <color key="backgroundColor" name="BackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="cKv-rS-Tjx">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="bNS-9H-UhE">
-                            <connections>
-                                <segue destination="ppS-SR-myx" kind="unwind" unwindAction="unwindtoPackingListViewControllerWithSegue:" id="VV1-Hc-rV7"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="Dix-6h-m3F">
                             <color key="tintColor" name="Color3"/>
                             <connections>
@@ -530,7 +539,7 @@
                                 <color key="separatorColor" name="Color1"/>
                                 <color key="sectionIndexBackgroundColor" name="BackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="lZu-Lg-9SE" detailTextLabel="UiB-fj-Ogx" style="IBUITableViewCellStyleSubtitle" id="e0l-L4-tNT">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="lZu-Lg-9SE" detailTextLabel="UiB-fj-Ogx" style="IBUITableViewCellStyleSubtitle" id="e0l-L4-tNT">
                                         <rect key="frame" x="0.0" y="44.5" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e0l-L4-tNT" id="Xcr-Yg-73e">
@@ -554,6 +563,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="Color1"/>
+                                        <connections>
+                                            <segue destination="7ZN-ed-NBk" kind="show" identifier="ShowTripDetails" id="gus-hl-V1T"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -619,65 +631,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UUa-r2-Lgf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8004.375" y="534.50704225352115"/>
-        </scene>
-        <!--Add Friend View Controller-->
-        <scene sceneID="t8I-ia-lkp">
-            <objects>
-                <viewController id="EOA-wr-xGX" customClass="AddFriendViewController" customModule="Easy_Travels" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="33V-6x-NPy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="i39-wH-6Ia">
-                                <rect key="frame" x="0.0" y="79" width="320" height="489"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" name="BackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="ryY-XK-Hpu" style="IBUITableViewCellStyleDefault" id="9O2-xW-ahw">
-                                        <rect key="frame" x="0.0" y="44.5" width="320" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9O2-xW-ahw" id="xmE-lw-ASz">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ryY-XK-Hpu">
-                                                    <rect key="frame" x="16" y="0.0" width="288" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                                    <color key="textColor" name="Color3"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" name="Color2"/>
-                                        <color key="tintColor" name="Color3"/>
-                                        <connections>
-                                            <segue destination="7ZN-ed-NBk" kind="presentation" identifier="ReturnTripDetail" trigger="accessoryAction" id="cIn-ei-4yU"/>
-                                            <segue destination="7ZN-ed-NBk" kind="show" identifier="AddFriend" id="wQ2-Am-9yB"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="xtZ-0M-nep"/>
-                        <color key="backgroundColor" name="BackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="gB2-sZ-afO"/>
-                    <connections>
-                        <outlet property="tableView" destination="i39-wH-6Ia" id="zIz-ia-YCn"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PSU-DF-wsS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6645" y="1110.2112676056338"/>
+            <point key="canvasLocation" x="9001.875" y="534.50704225352115"/>
         </scene>
         <!--Trip Details View Controller-->
         <scene sceneID="zhL-w6-XXN">
             <objects>
                 <viewController id="7ZN-ed-NBk" customClass="TripDetailsViewController" customModule="Easy_Travels" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fSm-2J-ZTT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TripName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujM-HL-CRA">
@@ -688,7 +649,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Gvx-CU-uk0">
-                                <rect key="frame" x="16" y="64" width="288" height="188"/>
+                                <rect key="frame" x="16" y="64" width="288" height="212"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="soc-xx-Hms">
@@ -696,12 +657,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uFX-TK-RD1">
-                                        <rect key="frame" x="21" y="225" width="284" height="32"/>
+                                        <rect key="frame" x="69" y="225" width="189" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <segments>
                                             <segment title="Packing List"/>
                                             <segment title="Locations"/>
-                                            <segment title="Friends"/>
                                         </segments>
                                         <color key="selectedSegmentTintColor" name="Color2"/>
                                         <connections>
@@ -720,13 +680,14 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pa-vN-pGY">
-                                                            <rect key="frame" x="243" y="6" width="45" height="31"/>
+                                                        <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pa-vN-pGY">
+                                                            <rect key="frame" x="244" y="7" width="45" height="31"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain" image="circle" catalog="system"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal" image="circle" catalog="system"/>
+                                                            <state key="selected" image="checkmark.circle" catalog="system"/>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The items they added" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4l-fd-EdT">
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The items they added" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4l-fd-EdT">
                                                             <rect key="frame" x="24" y="11" width="159" height="22"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
@@ -743,22 +704,22 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yx-5n-xHj">
-                                        <rect key="frame" x="237" y="8" width="62" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add"/>
-                                        <connections>
-                                            <action selector="addButtonPressed:" destination="7ZN-ed-NBk" eventType="touchUpInside" id="pMT-I5-PCz"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwZ-73-S2W">
-                                        <rect key="frame" x="18" y="8" width="60" height="31"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwZ-73-S2W">
+                                        <rect key="frame" x="17" y="0.0" width="83" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Edit"/>
                                         <connections>
                                             <action selector="editButtonPressed:" destination="7ZN-ed-NBk" eventType="touchUpInside" id="fUU-VR-3MS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yx-5n-xHj">
+                                        <rect key="frame" x="243" y="0.0" width="62" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Add"/>
+                                        <connections>
+                                            <action selector="addButtonPressed:" destination="7ZN-ed-NBk" eventType="touchUpInside" id="pMT-I5-PCz"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -777,17 +738,17 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="1yx-5n-xHj" id="nLz-Rt-HUc"/>
                         <outlet property="itemsTableView" destination="W2x-Bb-fcc" id="fKq-vd-2iK"/>
                         <outlet property="mapView" destination="Gvx-CU-uk0" id="5i5-wO-QU7"/>
                         <outlet property="tripNameLabel" destination="ujM-HL-CRA" id="NBn-tT-eBj"/>
                         <outlet property="viewSegmentControl" destination="uFX-TK-RD1" id="pxd-FA-Gtl"/>
                         <segue destination="86q-vX-Di8" kind="presentation" identifier="AddItemFromTripDetails" id="vRw-Vv-Hsj"/>
-                        <segue destination="yAL-xf-tlh" kind="presentation" identifier="AddFriend" id="PKQ-SU-eMM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VME-hc-TGd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3623" y="938"/>
+            <point key="canvasLocation" x="4620" y="936.97183098591552"/>
         </scene>
         <!--Users View Controller-->
         <scene sceneID="AHe-jb-TKt">
@@ -798,7 +759,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fQy-KG-oW6">
-                                <rect key="frame" x="0.0" y="94" width="320" height="474"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="BackgroundColor"/>
                                 <prototypes>
@@ -836,7 +797,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7I9-rx-Z6S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7007" y="2247"/>
+            <point key="canvasLocation" x="7006.875" y="2246.8309859154929"/>
         </scene>
         <!--Trips View Controller-->
         <scene sceneID="PlU-jJ-jE1">
@@ -878,6 +839,7 @@
                     <connections>
                         <outlet property="sideMenuBtn" destination="B7q-yA-RZ6" id="mqM-Na-WWB"/>
                         <outlet property="tableView" destination="0Ae-NV-rFS" id="uAy-2F-j0A"/>
+                        <segue destination="7ZN-ed-NBk" kind="show" identifier="ShowDetail" id="jia-Lb-Inu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JtY-Ws-Wsl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1021,7 +983,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6NR-kU-EdI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8004.375" y="1461.9718309859154"/>
+            <point key="canvasLocation" x="9001.875" y="1461.9718309859154"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UNW-Ld-G1K">
@@ -1060,35 +1022,37 @@
             <point key="canvasLocation" x="2925" y="3714"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="9S6-q3-TwL">
+        <scene sceneID="zlh-qD-7yQ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yAL-xf-tlh" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JSR-TY-l6v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K53-ot-ycW" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QtE-xO-ptS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                    <navigationItem key="navigationItem" id="Klq-iw-2nH"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mZ6-df-ZPs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="EOA-wr-xGX" kind="relationship" relationship="rootViewController" id="jff-ij-4AC"/>
+                        <segue destination="7ZN-ed-NBk" kind="relationship" relationship="rootViewController" id="BqI-bT-93D"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YOJ-XJ-lTu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5647.5" y="1110.2112676056338"/>
+            <point key="canvasLocation" x="3420" y="1012"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vRw-Vv-Hsj"/>
+        <segue reference="h9Y-43-QEW"/>
         <segue reference="3kL-l7-gUw"/>
-        <segue reference="cIn-ei-4yU"/>
-        <segue reference="L02-D7-RzS"/>
+        <segue reference="jia-Lb-Inu"/>
+        <segue reference="QhL-o3-fe0"/>
         <segue reference="qoL-a9-GYr"/>
-        <segue reference="vRM-Sb-Djp"/>
+        <segue reference="vC5-52-RMM"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Color3"/>
     <resources>
         <image name="arrowshape.turn.up.forward" catalog="system" width="128" height="106"/>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
         <image name="line.3.horizontal" catalog="system" width="128" height="64"/>

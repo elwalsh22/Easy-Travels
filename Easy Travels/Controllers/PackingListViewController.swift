@@ -12,6 +12,7 @@ class PackingListViewController: UIViewController {
     @IBOutlet weak var itemLabel: UILabel!
     var items: PackingItems!
     var trip: Trip!
+    var user: TravelUser!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,7 @@ class PackingListViewController: UIViewController {
         if trip.documentID != "" {
 
         }
-        items.loadData(trip: trip) {
+        items.loadData(user: user, trip: trip) {
             self.tableView.reloadData()
         }
     }
@@ -40,10 +41,18 @@ class PackingListViewController: UIViewController {
             let destination = navigationController.viewControllers.first as! PackingDetailViewController
             destination.trip = trip
             destination.items = items
+            destination.user = user
         case "ShowTripDetails":
             let destination = segue.destination as! TripDetailsViewController
             destination.trip = trip
             destination.items = items
+            destination.user = user
+        case "ShowItem":
+            let destination = segue.destination as! PackingDetailViewController
+            let selectedIndexPath = tableView.indexPathForSelectedRow!
+            destination.item = items.itemsArray[selectedIndexPath.row]
+            destination.trip = trip
+            destination.user = user
         default:
             print("couldn't find a case for segue identifier. this should not have happened")
         }

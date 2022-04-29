@@ -10,13 +10,16 @@ import GooglePlaces
 import MapKit
 import Contacts
 
+
 class TripDetailsViewController: UIViewController {
     
     var trip: Trip!
     var items: PackingItems!
     var users: TravelUsers!
+    var user: TravelUser!
     
     var locations: Locations!
+    
     var friends: Friends!
     
     var nSelectedSegmentIndex : Int = 1
@@ -25,6 +28,7 @@ class TripDetailsViewController: UIViewController {
     var locationManager: CLLocationManager!
     
     @IBOutlet weak var tripNameLabel: UILabel!
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var itemsTableView: UITableView!
@@ -40,23 +44,45 @@ class TripDetailsViewController: UIViewController {
         updateUserInterface()
         itemsTableView.delegate = self
         itemsTableView.dataSource = self
-        locations = Locations()
         friends = Friends()
         users = TravelUsers()
         friends.loadData {
             self.itemsTableView.reloadData()
         }
-        
+        if locations == nil {
+            locations = Locations()
+            locations.loadData(user: user, trip: trip) {
+            }
+            if items == nil {
+                items = PackingItems()
+                items.loadData(user: user, trip: trip) {
+                }
+            }
+            
+        }
     }
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+        
+        //items
         if sender.selectedSegmentIndex == 0 {
             self.nSelectedSegmentIndex = 1
+            updateMap()
         }
+        //locations
         else if sender.selectedSegmentIndex == 1 {
             self.nSelectedSegmentIndex = 2
-        } else {
-            self.nSelectedSegmentIndex = 3
+            locations.loadData(user: user, trip: trip) {
+                self.itemsTableView.reloadData()
+                for location in self.locations.locationsArray{
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = CLLocationCoordinate2D(latitude:location.latitude, longitude: location.longitude)
+                    annotation.title = location.title // Optional
+                    annotation.subtitle = location.subtitle // Optional
+                    self.mapView.addAnnotation(annotation)
+                }
+            }
+            
         }
         self.itemsTableView.reloadData()
     }
@@ -64,13 +90,26 @@ class TripDetailsViewController: UIViewController {
         if self.nSelectedSegmentIndex == 1 {
             performSegue(withIdentifier: "AddItemFromTripDetails", sender: sender)
             
-        } else if self.nSelectedSegmentIndex == 3 {
-                performSegue(withIdentifier: "AddFriend", sender: sender)
-        
+        } else if self.nSelectedSegmentIndex == 2{
+            let autocompleteController = GMSAutocompleteViewController()
+            autocompleteController.delegate = self
+            // Display the autocomplete view controller.
+            present(autocompleteController, animated: true, completion: nil)
         }
         
     }
     @IBAction func editButtonPressed(_ sender: UIButton) {
+        //if self.nSelectedSegmentIndex == 1 {
+        if itemsTableView.isEditing {
+            itemsTableView.setEditing(false, animated: true)
+            sender.setTitle("Edit", for: .normal)
+            addButton.isEnabled = true
+        } else {
+            itemsTableView.setEditing(true, animated: true)
+            sender.setTitle("Done", for: .normal)
+            addButton.isEnabled = false
+        }
+        //}
     }
     
     func setupMapView() {
@@ -95,11 +134,8 @@ class TripDetailsViewController: UIViewController {
             let destination = navigationController.viewControllers.first as! PackingDetailViewController
             destination.trip = trip
             destination.items = items
+            destination.user = user
             
-        case "AddFriend":
-            let navigationController = segue.destination as! UINavigationController
-            let destination = navigationController.viewControllers.first as! AddFriendViewController
-            destination.users = users
         default:
             print("error")
             
@@ -112,27 +148,34 @@ class TripDetailsViewController: UIViewController {
 
 
 
+
 extension TripDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if nSelectedSegmentIndex == 1 {
             return items.itemsArray.count
             
         }
-        else if nSelectedSegmentIndex == 2 {
+        else {
             return locations.locationsArray.count
-        } else { return friends.userArray.count
         }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = itemsTableView.dequeueReusableCell(withIdentifier: "PackingCell", for: indexPath) as! TripDetailsTableViewCell
         if nSelectedSegmentIndex == 1 {
+            cell.cellButton.isHidden = false
             cell.cellLabel?.text = items.itemsArray[indexPath.row].itemName
+            if let btnChk = cell.contentView.viewWithTag(2) as? UIButton {
+                btnChk.addTarget(self, action: #selector(checkboxClicked(_ :)), for: .touchUpInside)
+                btnChk.isSelected = items.itemsArray[indexPath.row].isPacked
+            }
+            
+            
         }
         else if nSelectedSegmentIndex == 2{
             cell.cellLabel?.text = locations.locationsArray[indexPath.row].locationName
-        } else {
-            cell.cellLabel?.text = friends.userArray[indexPath.row].displayName
+            cell.cellButton.isHidden = true
         }
         
         
@@ -140,7 +183,105 @@ extension TripDetailsViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     
+    @objc func checkboxClicked(_ sender: UIButton) {
+        if nSelectedSegmentIndex == 1{
+            sender.isSelected = !sender.isSelected
+            let point = sender.convert(CGPoint.zero, to: itemsTableView)
+            let indexPath = itemsTableView.indexPathForRow(at: point)
+            items.itemsArray[indexPath!.row].isPacked = !items.itemsArray[indexPath!.row].isPacked
+            items.itemsArray[indexPath!.row].saveData(user: user, trip: trip) { success in
+                if success {
+                    print("success")
+                    self.itemsTableView.reloadData()
+                } else {
+                    print("an error occured when trying to save this item's isPacked value")
+                }
+            }
+        }
+        
+        
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            if nSelectedSegmentIndex == 1 {
+                items.itemsArray.remove(at:  indexPath.row)
+                itemsTableView.deleteRows(at: [indexPath], with: .fade)
+                items.itemsArray[indexPath.row].saveData(user: user, trip: trip) { success in
+                    if success {
+                        print("successfully deleted an item")
+                    }
+                }
+            } else {
+                locations.locationsArray.remove(at:  indexPath.row)
+                itemsTableView.deleteRows(at: [indexPath], with: .fade)
+                locations.locationsArray[indexPath.row].saveData(user: user, trip: trip) { success in
+                    if success {
+                        print("successfully deleted an item")
+                    }
+                }
+            }
+            
+        }
+        
+        
+        func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+            if nSelectedSegmentIndex == 1 {
+                let itemToMove = items.itemsArray[sourceIndexPath.row]
+                items.itemsArray.remove(at: sourceIndexPath.row)
+                items.itemsArray.insert(itemToMove, at: destinationIndexPath.row)
+                
+            } else {
+                let itemToMove = locations.locationsArray[sourceIndexPath.row]
+                locations.locationsArray.remove(at: sourceIndexPath.row)
+                locations.locationsArray.insert(itemToMove, at: destinationIndexPath.row)
+                
+            }
+        }
+        
+        
+        
+    }
 }
+
+
+extension TripDetailsViewController: GMSAutocompleteViewControllerDelegate {
+    
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        
+        let locationName = place.name ?? "Unknown Place"
+        let address = place.formattedAddress ?? "Unknown Address"
+        let coordinate = place.coordinate
+        
+        let location = Location(locationName: locationName, address: address, coordinate: coordinate, documentID: "")
+        
+        location.saveData(user: user, trip: trip) {success in
+            if success {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude:location.latitude, longitude: location.longitude)
+                annotation.title = location.title // Optional
+                annotation.subtitle = location.subtitle //
+            } else {
+                print("error: tried to save a new location but failed")
+            }
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+
 
 
 extension TripDetailsViewController: CLLocationManagerDelegate {
@@ -235,3 +376,4 @@ extension TripDetailsViewController: CLLocationManagerDelegate {
     }
     
 }
+

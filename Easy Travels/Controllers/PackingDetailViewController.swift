@@ -12,8 +12,9 @@ class PackingDetailViewController: UIViewController {
     var trip: Trip!
     var item: PackingItem!
     var items: PackingItems!
+    var user: TravelUser!
     
-    var count: Int = 0 {
+    var count: Int = 1 {
         didSet {
             quantityTextField.text = "\(count)"
         }
@@ -32,8 +33,11 @@ class PackingDetailViewController: UIViewController {
             return
         }
         if item == nil {
+            print("item was nil")
             item = PackingItem()
+            quantityTextField.text = "1"
         }
+        
         updateUserInterface()
     }
     
@@ -46,7 +50,7 @@ class PackingDetailViewController: UIViewController {
     }
     func updateFromUserInterface() {
         item.itemName = itemTextField.text!
-        item.quantity = Int(quantityTextField.text!) ?? 0
+        item.quantity = Int(quantityTextField.text!) ?? 1
         print("item quantity is \(item.quantity)")
     }
     @IBAction func stepperPressed(_ sender: UIStepper) {
@@ -63,7 +67,7 @@ class PackingDetailViewController: UIViewController {
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         updateFromUserInterface()
-        item.saveData(trip: trip) { (success) in
+        item.saveData(user: user, trip: trip) { (success) in
             if success {
                 print("save button pressed")
                 self.items.itemsArray.append(self.item)

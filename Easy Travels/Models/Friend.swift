@@ -31,9 +31,9 @@ class Friend: TravelUser {
         
     }
     
-    func saveIfNewUser(user: TravelUser, completion: @escaping (Bool) -> ()) {
+    func saveIfNewFriend(user: TravelUser, trip: Trip, completion: @escaping (Bool) -> ()) {
         let db = Firestore.firestore()
-        let userRef = db.collection("users").document(user.documentID).collection("friends").document(documentID)
+        let userRef = db.collection("users").document(user.documentID).collection("trips").document(trip.documentID).collection("friends").document(documentID)
         userRef.getDocument { document, error in
             guard error == nil else {
                 print("Error cannout access document")
@@ -46,7 +46,7 @@ class Friend: TravelUser {
             //create new document
             
             let dataToSave: [String: Any] = self.dictionary
-            db.collection("users").document(user.documentID).collection("friends").document(self.documentID).setData(dataToSave) { (error) in
+            db.collection("users").document(user.documentID).collection("trips").document(trip.documentID).collection("friends").document(self.documentID).setData(dataToSave) { (error) in
                 guard error == nil else {
                     print("Error \(error!.localizedDescription)")
                     return completion(false)

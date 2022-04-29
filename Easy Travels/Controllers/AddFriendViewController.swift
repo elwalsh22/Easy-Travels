@@ -10,6 +10,8 @@ import UIKit
 class AddFriendViewController: UIViewController {
     
     var users: TravelUsers!
+    var user: TravelUser!
+    var trip: Trip!
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -36,6 +38,11 @@ class AddFriendViewController: UIViewController {
         if segue.identifier == "ReturnTripDetail" {
             let destination = segue.destination as! TripDetailsViewController
             let selectedIndexPath = tableView.indexPathForSelectedRow!
+            let friend = Friend(email: users.userArray[selectedIndexPath.row].email, displayName: users.userArray[selectedIndexPath.row].displayName, photoURL: users.userArray[selectedIndexPath.row].photoURL, userSince: users.userArray[selectedIndexPath.row].userSince, documentID: users.userArray[selectedIndexPath.row].documentID)
+            
+            friend.saveIfNewFriend(user: user, trip: trip, completion: {_ in 
+            })
+            
             destination.friends.userArray.append(users.userArray[selectedIndexPath.row] as! Friend)
         }
     }

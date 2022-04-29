@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
 
         private var revealSideMenuOnTop: Bool = true
     
-    
+    var user: TravelUser!
         override public func viewDidLoad() {
             super.viewDidLoad()
             
@@ -77,7 +77,7 @@ class MainViewController: UIViewController {
            showViewController(viewController: UINavigationController.self, storyboardId: "HomeNavID")
          
         }
-   
+       
     
     @IBAction open func revealSideMenu() {
         self.sideMenuState(expanded: self.isExpanded ? false : true)
@@ -91,11 +91,12 @@ extension MainViewController: SideMenuViewControllerDelegate {
             // Home
             self.showViewController(viewController: UINavigationController.self, storyboardId: "HomeNavID")
         case 1:
-            // Music
-            self.showViewController(viewController: UINavigationController.self, storyboardId: "UsersNavID")
-        case 2:
-            // Movies
+            
             self.showViewController(viewController: UINavigationController.self, storyboardId: "TripsNavID")
+        case 2:
+            
+            self.showViewController(viewController: UINavigationController.self, storyboardId: "UsersNavID")
+            
         
         default:
             break

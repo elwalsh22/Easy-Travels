@@ -12,6 +12,7 @@ class TripSelectorViewController: UIViewController {
     
     var canSegue = false
     var trip: Trip!
+    var user: TravelUser!
 
     @IBOutlet weak var tripNameTextField: UITextField!
     @IBOutlet weak var departureDatePicker: UIDatePicker!
@@ -29,6 +30,9 @@ class TripSelectorViewController: UIViewController {
             tripNameTextField.text = trip.name
             departureDatePicker.date = trip.departureDate
             returnDatePicker.date = trip.returnDate
+        }
+        if user == nil {
+            
         }
     
     }
@@ -53,7 +57,7 @@ class TripSelectorViewController: UIViewController {
         print("return date: \(returnDatePicker.date)")
         if returnDatePicker.date <= departureDatePicker.date {
             canSegue = false
-            errorLabel.text = "please give your trip a name to continue"
+            errorLabel.text = "please make your return date later than your departure"
         }
         
     }
@@ -64,6 +68,7 @@ class TripSelectorViewController: UIViewController {
             let destination = segue.destination as! LocationSelectorViewController
             print("in the prepare for segue, the trip doc id is \(self.trip.documentID) .")
             destination.trip = self.trip
+            destination.user = self.user
         }
     }
     
@@ -79,12 +84,12 @@ class TripSelectorViewController: UIViewController {
         }
         trip.name = tripNameTextField.text!
         if canSegue {
-            trip.saveData { success in
+            trip.saveData(user: user) { success in
                 if success {
                     self.errorLabel.isHidden = false
                     self.performSegue(withIdentifier: "ShowLocationSelector", sender: sender)
                 } else {
-                    print("error: tried to save a new user but failed")
+                    print("error: tried to save a new trip but failed")
                 }
             }
            

@@ -88,7 +88,7 @@ class Trip: NSObject, MKAnnotation{
         
     }
     
-    func saveData(completed: @escaping (Bool) -> ()) {
+    func saveData(user: TravelUser, completed: @escaping (Bool) -> ()) {
         let db = Firestore.firestore()
         //Grab the userID
         guard let postingUserID = (Auth.auth().currentUser?.uid) else {
@@ -103,7 +103,7 @@ class Trip: NSObject, MKAnnotation{
         
         if self.documentID == "" {
             var ref: DocumentReference? = nil
-            ref = db.collection("trips").addDocument(data: dataToSave) {
+            ref = db.collection("users").document(user.documentID).collection("trips").addDocument(data: dataToSave) {
                 (error) in guard error ==  nil else{
                     print("😡Error adding document \(error!.localizedDescription)")
                     return completed(false)
@@ -113,7 +113,7 @@ class Trip: NSObject, MKAnnotation{
                 completed(true)
             }
         } else {
-            let ref = db.collection("trips").document(self.documentID)
+            let ref = db.collection("users").document(user.documentID).collection("trips").document(self.documentID)
             ref.setData(dataToSave) {    (error) in guard error ==  nil else{
                 print("😡Error updating document \(error!.localizedDescription)")
                 return completed(false)

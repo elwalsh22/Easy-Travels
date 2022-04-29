@@ -11,6 +11,8 @@ import FirebaseGoogleAuthUI
 
 class LoginViewController: UIViewController {
     var authUI: FUIAuth!
+    var user: TravelUser!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         authUI = FUIAuth.defaultAuthUI()
@@ -38,6 +40,8 @@ class LoginViewController: UIViewController {
                 return
             }
             let travelUser = TravelUser( user: currentUser)
+            user = travelUser
+            
             travelUser.saveIfNewUser { success in
                 if success {
                     self.performSegue(withIdentifier: "FirstShowSegue", sender: nil)
@@ -51,6 +55,20 @@ class LoginViewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "FirstShowSegue" {
+            
+            let destination = segue.destination as! WelcomeViewController
+            print("login view controller user is \(user.documentID ?? "error")")
+            destination.user = self.user
+            
+        } else if segue.identifier == "LogintoMain" {
+            let destination = segue.destination as! MainViewController
+            destination.user = self.user
+        }
+     
+    }
+    
     func signOut() {
         do {
             try authUI!.signOut()
@@ -58,8 +76,6 @@ class LoginViewController: UIViewController {
             print("😡 ERROR: couldn't sign out")
             performSegue(withIdentifier: "FirstShowSegue", sender: nil)
         }
-
-
 }
 }
 

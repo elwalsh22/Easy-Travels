@@ -26,8 +26,8 @@ class SideMenuViewController: UIViewController {
     var delegate: SideMenuViewControllerDelegate?
     var menu: [SideMenuModel] = [
             SideMenuModel(icon: UIImage(systemName: "house.fill")!, title: "Home"),
-            SideMenuModel(icon: UIImage(systemName: "person.fill")!, title: "Users"),
             SideMenuModel(icon: UIImage(systemName: "airplane")!, title: "Trips"),
+            SideMenuModel(icon: UIImage(systemName: "person.fill")!, title: "Users")
            
         ]
     override func viewDidLoad() {

@@ -11,9 +11,12 @@ class TripDetailsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellLabel: UILabel!
     @IBOutlet weak var cellButton: UIButton!
+    
+   
+   
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -21,5 +24,8 @@ class TripDetailsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+                                        
+    
+    }
+    
 
-}
