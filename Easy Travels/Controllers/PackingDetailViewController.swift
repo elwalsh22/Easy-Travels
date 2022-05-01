@@ -36,9 +36,10 @@ class PackingDetailViewController: UIViewController {
             print("item was nil")
             item = PackingItem()
             quantityTextField.text = "1"
-        }
+        } else {
         
         updateUserInterface()
+        }
     }
     
     

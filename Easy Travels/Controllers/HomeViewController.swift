@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
     var trips: Trips!
     var authUI: FUIAuth!
     var trip: Trip!
+    var items: PackingItems!
     
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var sideMenuBtn: UIBarButtonItem!
@@ -25,7 +26,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var daysLabel: UILabel!
     
-   
+    
     
     
     override func viewDidLoad() {
@@ -35,6 +36,7 @@ class HomeViewController: UIViewController {
         authUI.delegate = self
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.day]
+        formatter.unitsStyle = .short
         
         guard let currentUser = authUI.auth?.currentUser else {
             print("Error")
@@ -46,8 +48,15 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
         welcomeLabel.text = "Welcome \(currentUser.displayName ?? "")"
         
-     
+        if trips == nil {
         trips = Trips()
+        }
+        if trip == nil {
+            trip = Trip()
+        }
+        if items == nil {
+            items = PackingItems()
+        }
         trips.loadData(user: user) {
             self.tableView.reloadData()
             
@@ -55,11 +64,12 @@ class HomeViewController: UIViewController {
                 self.daysLabel.isHidden = true
                 self.daysUntilLabel.isHidden = true
                 self.locationLabel.text = "No Upcoming Trips"
-            }
-            
-            let delta = self.trips.tripArray[0].departureDate.timeIntervalSince(Date())
+            } else {
+                let delta = self.trips.tripArray[0].departureDate.timeIntervalSince(Date())
             self.daysLabel.text = "\(formatter.string(from: delta) ?? "")"
+
             self.locationLabel.text = self.trips.tripArray[0].name
+            }
             
         }
         
@@ -71,13 +81,22 @@ class HomeViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowTripDetails" {
-        let destination = segue.destination as! TripDetailsViewController
-            let selectedIndexPath = tableView.indexPathForSelectedRow?.row ?? 0
-            print(trips.tripArray[selectedIndexPath].name)
-            destination.trip = trips.tripArray[selectedIndexPath]
-        destination.user = user
-    }
+        if segue.identifier == "GoToTripDetails" {
+            let destination = segue.destination as! TripDetailsViewController
+            let selectedIndexPathRow = tableView.indexPathForSelectedRow?.row ?? 0
+            print(trips.tripArray[selectedIndexPathRow].name)
+            destination.trip = trips.tripArray[selectedIndexPathRow]
+            destination.user = user
+//            items = PackingItems()
+//            items.loadData(user: user, trip: trips.tripArray[selectedIndexPathRow]) {
+//                destination.items = self.items
+//            }
+            
+        }
+        else if segue.identifier == "AddTrip" {
+            let destination = segue.destination as! TripSelectorViewController
+            destination.user = user
+        }
     }
     
     
@@ -88,6 +107,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return trips.tripArray.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -108,6 +128,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        
     }
     
     

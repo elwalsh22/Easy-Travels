@@ -18,7 +18,7 @@ class LocationSelectorViewController: UIViewController {
     var location: GMSPlace!
     var trip: Trip!
     var user: TravelUser!
-    let regionDistance: CLLocationDegrees = 2000.0
+    let regionDistance: CLLocationDegrees = 4000.0
     var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
@@ -30,6 +30,7 @@ class LocationSelectorViewController: UIViewController {
         if user == nil {
 
         }
+        locationNameLabel.text = ""
         setupMapView()
         updateUserInterface()
         

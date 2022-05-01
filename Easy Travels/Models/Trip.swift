@@ -123,5 +123,18 @@ class Trip: NSObject, MKAnnotation{
             }
         }
     }
+    
+    
+    func deleteData(user: TravelUser, trip: Trip, completion: @escaping (Bool) -> ()) {
+        let db = Firestore.firestore()
+        db.collection("users").document(user.documentID).collection("trips").document(trip.documentID).collection("locations").document(documentID).delete() { error in
+            if let error = error {
+                print("Error: deleting review \(self.documentID)")
+                completion(false)
+            } else {
+                print("successfully deleted \(self.documentID)")
+            }
+        }
+    }
 }
 

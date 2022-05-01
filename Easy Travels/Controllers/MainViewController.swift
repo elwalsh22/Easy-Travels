@@ -40,6 +40,7 @@ class MainViewController: UIViewController {
                     self.sideMenuShadowView.alpha = 0.0
                     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizer))
                     tapGestureRecognizer.numberOfTapsRequired = 1
+                tapGestureRecognizer.cancelsTouchesInView = false
                     tapGestureRecognizer.delegate = self
                     view.addGestureRecognizer(tapGestureRecognizer)
                     if self.revealSideMenuOnTop {

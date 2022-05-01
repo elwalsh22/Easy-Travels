@@ -14,7 +14,10 @@ class WelcomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        trips = Trips()
+        if trips == nil {
+            trips = Trips()
+        }
+        
         
 
     }

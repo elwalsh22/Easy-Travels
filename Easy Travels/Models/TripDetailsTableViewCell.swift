@@ -12,7 +12,8 @@ class TripDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var cellLabel: UILabel!
     @IBOutlet weak var cellButton: UIButton!
     
-   
+    @IBOutlet weak var quantityLabel: UILabel!
+    
    
     override func awakeFromNib() {
         super.awakeFromNib()

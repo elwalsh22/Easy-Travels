@@ -10,12 +10,17 @@ import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 
 class TripsViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sideMenuBtn: UIBarButtonItem!
+    
+    @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    
     var trips: Trips!
     var authUI: FUIAuth!
     var user: TravelUser!
+    var items: PackingItems!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,16 +28,16 @@ class TripsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         authUI = FUIAuth.defaultAuthUI()
-    
+        
         authUI.delegate = self
         guard let currentUser = authUI.auth?.currentUser else {
             print("Error")
             return
         }
         user = TravelUser(user: currentUser)
-
+        
         sideMenuBtn.target = revealViewController()
-                sideMenuBtn.action = #selector(revealViewController()?.revealSideMenu)
+        sideMenuBtn.action = #selector(revealViewController()?.revealSideMenu)
         
         trips = Trips()
         trips.loadData(user: user) {
@@ -42,15 +47,44 @@ class TripsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowTripDetail" {
-        let destination = segue.destination as! TripDetailsViewController
-            //let selectedIndexPath = tableView.indexPathForSelectedRow!
-            destination.trip = trips.tripArray[0]
-        destination.user = user
-    }
+        if segue.identifier == "ShowDetail" {
+            let destination = segue.destination as! TripDetailsViewController
+            let selectedIndexPathRow = tableView.indexPathForSelectedRow?.row ?? 0
+            print(trips.tripArray[selectedIndexPathRow].name)
+            destination.trip = trips.tripArray[selectedIndexPathRow]
+            destination.user = user
+            items = PackingItems()
+            items.loadData(user: user, trip: trips.tripArray[selectedIndexPathRow]) {
+                destination.items = self.items
+            }
+            
+        } else if segue.identifier == "AddFromTable" {
+            let destination = segue.destination as! TripSelectorViewController
+            destination.user = user
+        }
     }
     
-
+    
+    
+    @IBAction func editButtonPressed(_ sender: UIButton) {
+        if tableView.isEditing {
+            tableView.setEditing(false, animated: true)
+            sender.setTitle("Edit", for: .normal)
+            addButton.isEnabled = true
+        } else {
+            tableView.setEditing(true, animated: true)
+            sender.setTitle("Done", for: .normal)
+            addButton.isEnabled = false
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 extension TripsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -66,32 +100,41 @@ extension TripsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        let tripToMove = trips.tripArray[sourceIndexPath.row]
+        trips.tripArray.remove(at: sourceIndexPath.row)
+        trips.tripArray.insert(tripToMove, at: destinationIndexPath.row)
+            
+    }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
     
 }
-
 extension TripsViewController: FUIAuthDelegate {
     func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
         let marginInsets: CGFloat = 16.0 // amount to indent UIImageView on each side
         let topSafeArea = self.view.safeAreaInsets.top
-
+        
         // Create an instance of the FirebaseAuth login view controller
         let loginViewController = FUIAuthPickerViewController(authUI: authUI)
-
+        
         // Set background color to white
         loginViewController.view.backgroundColor = UIColor.white
         loginViewController.view.subviews[0].backgroundColor = UIColor.clear
         loginViewController.view.subviews[0].subviews[0].backgroundColor = UIColor.clear
-
+        
         // Create a frame for a UIImageView to hold our logo
         let x = marginInsets
         let y = marginInsets + topSafeArea
         let width = self.view.frame.width - (marginInsets * 2)
         //        let height = loginViewController.view.subviews[0].frame.height - (topSafeArea) - (marginInsets * 2)
         let height = UIScreen.main.bounds.height - (topSafeArea) - (marginInsets * 2)
-
+        
         let logoFrame = CGRect(x: x, y: y, width: width, height: height)
-
+        
         // Create the UIImageView using the frame created above & add the "logo" image
         let logoImageView = UIImageView(frame: logoFrame)
         logoImageView.image = UIImage(named: "logo")
@@ -101,8 +144,5 @@ extension TripsViewController: FUIAuthDelegate {
     }
     
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "ShowDetail", sender: self)
-    }
+    
 }

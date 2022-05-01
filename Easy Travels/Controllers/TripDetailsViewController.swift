@@ -24,7 +24,7 @@ class TripDetailsViewController: UIViewController {
     
     var nSelectedSegmentIndex : Int = 1
     
-    let regionDistance: CLLocationDegrees = 2000.0
+    let regionDistance: CLLocationDegrees = 4000.0
     var locationManager: CLLocationManager!
     
     @IBOutlet weak var tripNameLabel: UILabel!
@@ -35,31 +35,30 @@ class TripDetailsViewController: UIViewController {
     @IBOutlet weak var viewSegmentControl: UISegmentedControl!
     override func viewDidLoad() {
         super.viewDidLoad()
-        tripNameLabel.text = trip.name
         itemsTableView.delegate = self
         itemsTableView.dataSource = self
+        tripNameLabel.text = trip.name
+        if locations == nil {
+            locations = Locations()
+        }
+        if items == nil {
+            items = PackingItems()
+            items.loadData(user: user, trip: trip) {
+                self.itemsTableView.reloadData()
+            }
+        }
+        
+        
         navigationController?.setToolbarHidden(true, animated: false)
         
         setupMapView()
         updateUserInterface()
-        itemsTableView.delegate = self
-        itemsTableView.dataSource = self
-        friends = Friends()
+        nSelectedSegmentIndex = 1
         users = TravelUsers()
-        friends.loadData {
-            self.itemsTableView.reloadData()
-        }
-        if locations == nil {
-            locations = Locations()
-            locations.loadData(user: user, trip: trip) {
-            }
-            if items == nil {
-                items = PackingItems()
-                items.loadData(user: user, trip: trip) {
-                }
-            }
-            
-        }
+        
+        
+        
+        
     }
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
@@ -128,24 +127,19 @@ class TripDetailsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier ?? "" {
-        case "AddItemFromTripDetails":
+        
+        if segue.identifier == "AddItemFromTripDetails" {
             let navigationController = segue.destination as! UINavigationController
             let destination = navigationController.viewControllers.first as! PackingDetailViewController
             destination.trip = trip
             destination.items = items
             destination.user = user
-            
-        default:
-            print("error")
-            
-            
         }
         
     }
+    
+    
 }
-
-
 
 
 
@@ -165,7 +159,9 @@ extension TripDetailsViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = itemsTableView.dequeueReusableCell(withIdentifier: "PackingCell", for: indexPath) as! TripDetailsTableViewCell
         if nSelectedSegmentIndex == 1 {
             cell.cellButton.isHidden = false
+            cell.quantityLabel.isHidden = false
             cell.cellLabel?.text = items.itemsArray[indexPath.row].itemName
+            cell.quantityLabel?.text = "\(items.itemsArray[indexPath.row].quantity)"
             if let btnChk = cell.contentView.viewWithTag(2) as? UIButton {
                 btnChk.addTarget(self, action: #selector(checkboxClicked(_ :)), for: .touchUpInside)
                 btnChk.isSelected = items.itemsArray[indexPath.row].isPacked
@@ -176,12 +172,16 @@ extension TripDetailsViewController: UITableViewDelegate, UITableViewDataSource 
         else if nSelectedSegmentIndex == 2{
             cell.cellLabel?.text = locations.locationsArray[indexPath.row].locationName
             cell.cellButton.isHidden = true
+            cell.quantityLabel.isHidden = true
         }
         
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
     
     @objc func checkboxClicked(_ sender: UIButton) {
         if nSelectedSegmentIndex == 1{
@@ -202,47 +202,25 @@ extension TripDetailsViewController: UITableViewDelegate, UITableViewDataSource 
         
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete{
-            if nSelectedSegmentIndex == 1 {
-                items.itemsArray.remove(at:  indexPath.row)
-                itemsTableView.deleteRows(at: [indexPath], with: .fade)
-                items.itemsArray[indexPath.row].saveData(user: user, trip: trip) { success in
-                    if success {
-                        print("successfully deleted an item")
-                    }
-                }
-            } else {
-                locations.locationsArray.remove(at:  indexPath.row)
-                itemsTableView.deleteRows(at: [indexPath], with: .fade)
-                locations.locationsArray[indexPath.row].saveData(user: user, trip: trip) { success in
-                    if success {
-                        print("successfully deleted an item")
-                    }
-                }
-            }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        if nSelectedSegmentIndex == 1 {
+            let itemToMove = items.itemsArray[sourceIndexPath.row]
+            items.itemsArray.remove(at: sourceIndexPath.row)
+            items.itemsArray.insert(itemToMove, at: destinationIndexPath.row)
+            
+        } else {
+            let itemToMove = locations.locationsArray[sourceIndexPath.row]
+            locations.locationsArray.remove(at: sourceIndexPath.row)
+            locations.locationsArray.insert(itemToMove, at: destinationIndexPath.row)
             
         }
-        
-        
-        func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-            if nSelectedSegmentIndex == 1 {
-                let itemToMove = items.itemsArray[sourceIndexPath.row]
-                items.itemsArray.remove(at: sourceIndexPath.row)
-                items.itemsArray.insert(itemToMove, at: destinationIndexPath.row)
-                
-            } else {
-                let itemToMove = locations.locationsArray[sourceIndexPath.row]
-                locations.locationsArray.remove(at: sourceIndexPath.row)
-                locations.locationsArray.insert(itemToMove, at: destinationIndexPath.row)
-                
-            }
-        }
-        
-        
-        
     }
+    
+    
+    
 }
+
 
 
 extension TripDetailsViewController: GMSAutocompleteViewControllerDelegate {

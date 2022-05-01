@@ -81,14 +81,15 @@ class PackingItem {
     }
     
     
-    func deleteData(trip: Trip, completion: @escaping (Bool) -> ()) {
+    func deleteData(user: TravelUser, trip: Trip, completion: @escaping (Bool) -> ()) {
         let db = Firestore.firestore()
-        db.collection("trips").document(trip.documentID).collection("items").document(documentID).delete() { error in
+        db.collection("users").document(user.documentID).collection("trips").document(trip.documentID).collection("items").document(documentID).delete() { error in
             if let error = error {
                 print("Error: deleting review \(self.documentID)")
                 completion(false)
             } else {
                 print("successfully deleted \(self.documentID)")
+                completion(true)
             }
         }
     }
