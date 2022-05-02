@@ -389,7 +389,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ucT-pH-c9Q">
-                                <rect key="frame" x="0.0" y="120" width="390" height="605"/>
+                                <rect key="frame" x="0.0" y="64" width="390" height="661"/>
                                 <color key="backgroundColor" name="BackgroundColor"/>
                                 <color key="separatorColor" name="Color1"/>
                                 <color key="sectionIndexBackgroundColor" name="Color1"/>
@@ -428,7 +428,7 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Packing List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dt9-UV-RNP">
-                                <rect key="frame" x="142" y="56" width="106" height="28"/>
+                                <rect key="frame" x="142" y="0.0" width="106" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="eQD-Rw-9ym"/>
                                 </constraints>
@@ -437,7 +437,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="press the + to get started" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xrG-dt-TPe">
-                                <rect key="frame" x="16" y="83" width="358" height="21"/>
+                                <rect key="frame" x="16" y="27" width="358" height="21"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Italic" family="Avenir Next" pointSize="15"/>
                                 <color key="textColor" name="Color3"/>
                                 <nil key="highlightedColor"/>
@@ -475,9 +475,9 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="packingReminderLabel" destination="xrG-dt-TPe" id="JDa-Mz-UR8"/>
                         <outlet property="tableView" destination="ucT-pH-c9Q" id="TMD-kZ-Yra"/>
                         <segue destination="86q-vX-Di8" kind="presentation" identifier="AddItem" id="h9Y-43-QEW"/>
-                        <segue destination="ppS-SR-myx" kind="unwind" unwindAction="unwindSaveButtonPressedWithSegue:" id="ahw-kP-ohB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tfi-s0-Gib" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -580,8 +580,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Save" id="Dix-6h-m3F">
                             <color key="tintColor" name="Color3"/>
                             <connections>
-                                <action selector="saveButtonPressed:" destination="Icb-mw-PZg" id="c82-Fb-3Ei"/>
-                                <segue destination="ppS-SR-myx" kind="unwind" unwindAction="unwindtoPackingListViewControllerWithSegue:" id="6Oo-S4-4fV"/>
+                                <segue destination="ppS-SR-myx" kind="unwind" unwindAction="unwindFromPackingDetailViewControllerWithSegue:" id="34q-IK-0k1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -745,23 +744,23 @@
             <objects>
                 <viewController id="7ZN-ed-NBk" customClass="TripDetailsViewController" customModule="Easy_Travels" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fSm-2J-ZTT">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TripName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujM-HL-CRA">
-                                <rect key="frame" x="158" y="88" width="74" height="21"/>
+                                <rect key="frame" x="158" y="0.0" width="74" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="Color3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Gvx-CU-uk0">
-                                <rect key="frame" x="16" y="117" width="358" height="245"/>
+                                <rect key="frame" x="16" y="29" width="358" height="245"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="245" id="5aH-8o-bGf"/>
                                 </constraints>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwZ-73-S2W">
-                                <rect key="frame" x="16" y="370" width="49" height="31"/>
+                                <rect key="frame" x="16" y="282" width="49" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="GGe-ru-nMl"/>
                                 </constraints>
@@ -772,7 +771,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="W2x-Bb-fcc">
-                                <rect key="frame" x="16" y="409" width="358" height="352"/>
+                                <rect key="frame" x="16" y="321" width="358" height="371"/>
                                 <color key="backgroundColor" name="BackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PackingCell" id="L5G-CB-Wbc" customClass="TripDetailsTableViewCell" customModule="Easy_Travels" customModuleProvider="target">
@@ -827,7 +826,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yx-5n-xHj">
-                                <rect key="frame" x="324" y="370" width="50" height="31"/>
+                                <rect key="frame" x="324" y="282" width="50" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="zPu-ZK-FMt"/>
                                 </constraints>
@@ -838,7 +837,7 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uFX-TK-RD1">
-                                <rect key="frame" x="100.66666666666669" y="769" width="189" height="32"/>
+                                <rect key="frame" x="100.66666666666669" y="700" width="189" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="7jS-xT-Ukt"/>
                                 </constraints>
@@ -1234,7 +1233,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="vRw-Vv-Hsj"/>
         <segue reference="3kL-l7-gUw"/>
-        <segue reference="FAG-Za-89q"/>
+        <segue reference="bbX-x6-I4m"/>
         <segue reference="L02-D7-RzS"/>
         <segue reference="qoL-a9-GYr"/>
         <segue reference="vC5-52-RMM"/>

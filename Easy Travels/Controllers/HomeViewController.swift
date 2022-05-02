@@ -58,6 +58,7 @@ class HomeViewController: UIViewController {
             items = PackingItems()
         }
         trips.loadData(user: user) {
+            self.trips.tripArray.sort(by:( {$0.departureDate < $1.departureDate}))
             self.tableView.reloadData()
             
             if self.trips.tripArray.count == 0 {

@@ -41,6 +41,7 @@ class TripsViewController: UIViewController {
         
         trips = Trips()
         trips.loadData(user: user) {
+            self.trips.tripArray.sort(by:( {$0.departureDate < $1.departureDate}))
             self.tableView.reloadData()
         }
         
@@ -107,9 +108,25 @@ extension TripsViewController: UITableViewDelegate, UITableViewDataSource {
         trips.tripArray.insert(tripToMove, at: destinationIndexPath.row)
             
     }
+    //gets rid of the delete option
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        .none
+//    }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .none
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("deleting: \(trips.tripArray[indexPath.row].name)")
+            print("with documentID: \(trips.tripArray[indexPath.row].documentID)")
+            print("IndexPath.row is \(indexPath.row)")
+            trips.tripArray[indexPath.row].deleteData(user: user,trip: trips.tripArray[indexPath.row]) { success in
+                if success {
+                    self.trips.tripArray.remove(at: indexPath.row)
+                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+
+
+            }
+        }
     }
     
 }

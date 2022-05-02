@@ -46,7 +46,7 @@ class PackingDetailViewController: UIViewController {
     func updateUserInterface() {
         
         itemTextField.text = item.itemName
-        quantityTextField.text = "\(item.quantity)"
+        quantityTextField.text = "\(item.quantity )"
         
     }
     func updateFromUserInterface() {
@@ -68,6 +68,7 @@ class PackingDetailViewController: UIViewController {
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         updateFromUserInterface()
+        print("here we are")
         item.saveData(user: user, trip: trip) { (success) in
             if success {
                 print("save button pressed")
@@ -83,12 +84,31 @@ class PackingDetailViewController: UIViewController {
     }
        
         
-    }
+    
+    
+//    @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+//
+//
+//    }
+    
+    
     
    
 //    @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+//        let isPresentingInAddMode = presentingViewController is UINavigationController
+//        if isPresentingInAddMode {
+//            item.saveData(user: user, trip: trip) { (success) in
+//                if success {
+//                    print("save button pressed")
+//                    self.items.itemsArray.append(self.item)
+//                    self.dismiss(animated:true, completion: nil)
+//                }else {
+//                    print("error: can't unwind segue from review because of review saving error")
+//                }
+//            }
+//        } else {
 //        updateFromUserInterface()
-//        item.saveData(trip: trip) { (success) in
+//        item.saveData(user: user, trip: trip) { (success) in
 //            if success {
 //                print("save button pressed")
 //                self.items.itemsArray.append(self.item)
@@ -96,8 +116,9 @@ class PackingDetailViewController: UIViewController {
 //                print("error: can't unwind segue from review because of review saving error")
 //            }
 //        }
+//        }
 //    }
 
 
 
-
+}

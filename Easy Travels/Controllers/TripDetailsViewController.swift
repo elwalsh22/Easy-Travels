@@ -44,9 +44,13 @@ class TripDetailsViewController: UIViewController {
         if items == nil {
             items = PackingItems()
             items.loadData(user: user, trip: trip) {
+                self.items.itemsArray.sort(by:( {$0.itemName < $1.itemName}))
                 self.itemsTableView.reloadData()
+                
             }
         }
+        
+        
         
         
         navigationController?.setToolbarHidden(true, animated: false)
@@ -60,18 +64,25 @@ class TripDetailsViewController: UIViewController {
         
         
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        itemsTableView.reloadData()
+    }
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         
         //items
         if sender.selectedSegmentIndex == 0 {
             self.nSelectedSegmentIndex = 1
+            self.items.itemsArray.sort(by:( {$0.itemName < $1.itemName}))
+            self.itemsTableView.reloadData()
             updateMap()
         }
         //locations
         else if sender.selectedSegmentIndex == 1 {
             self.nSelectedSegmentIndex = 2
             locations.loadData(user: user, trip: trip) {
+                self.locations.locationsArray.sort(by:( {$0.locationName < $1.locationName}))
                 self.itemsTableView.reloadData()
                 for location in self.locations.locationsArray{
                     let annotation = MKPointAnnotation()
@@ -138,6 +149,12 @@ class TripDetailsViewController: UIViewController {
         
     }
     
+    @IBAction func unwindFromPackingDetailViewController(segue: UIStoryboardSegue) {
+//        self.items.itemsArray.sort(by:( {$0.itemName < $1.itemName}))
+//        self.itemsTableView.reloadData()
+        
+    }
+    
     
 }
 
@@ -178,11 +195,11 @@ extension TripDetailsViewController: UITableViewDelegate, UITableViewDataSource 
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .none
-    }
-    
+        //disables delete
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        return .none
+//    }
+//
     @objc func checkboxClicked(_ sender: UIButton) {
         if nSelectedSegmentIndex == 1{
             sender.isSelected = !sender.isSelected
@@ -201,21 +218,52 @@ extension TripDetailsViewController: UITableViewDelegate, UITableViewDataSource 
         
         
     }
-    
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        if nSelectedSegmentIndex == 1 {
-            let itemToMove = items.itemsArray[sourceIndexPath.row]
-            items.itemsArray.remove(at: sourceIndexPath.row)
-            items.itemsArray.insert(itemToMove, at: destinationIndexPath.row)
-            
-        } else {
-            let itemToMove = locations.locationsArray[sourceIndexPath.row]
-            locations.locationsArray.remove(at: sourceIndexPath.row)
-            locations.locationsArray.insert(itemToMove, at: destinationIndexPath.row)
-            
+    //delete
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if nSelectedSegmentIndex == 1 {
+            print("deleting: \(items.itemsArray[indexPath.row].itemName)")
+            print("with documentID: \(items.itemsArray[indexPath.row].documentID)")
+            print("IndexPath.row is \(indexPath.row)")
+                items.itemsArray[indexPath.row].deleteData(user: user,trip: trip) { success in
+                if success {
+                    self.items.itemsArray.remove(at: indexPath.row)
+                    self.itemsTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+
+
+            }
+            } else if nSelectedSegmentIndex == 2 {
+                print("deleting: \(locations.locationsArray[indexPath.row].locationName)")
+                print("with documentID: \(locations.locationsArray[indexPath.row].documentID)")
+                print("IndexPath.row is \(indexPath.row)")
+                locations.locationsArray[indexPath.row].deleteData(user: user,trip: trip) { success in
+                    if success {
+                        self.locations.locationsArray.remove(at: indexPath.row)
+                        self.itemsTableView.deleteRows(at: [indexPath], with: .fade)
+                }
+
+
+                }
+                
+            }
         }
     }
+    
+    //shouldn't move row but can delete...
+//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        if nSelectedSegmentIndex == 1 {
+//            let itemToMove = items.itemsArray[sourceIndexPath.row]
+//            items.itemsArray.remove(at: sourceIndexPath.row)
+//            items.itemsArray.insert(itemToMove, at: destinationIndexPath.row)
+//
+//        } else {
+//            let itemToMove = locations.locationsArray[sourceIndexPath.row]
+//            locations.locationsArray.remove(at: sourceIndexPath.row)
+//            locations.locationsArray.insert(itemToMove, at: destinationIndexPath.row)
+//
+//        }
+//    }
     
     
     

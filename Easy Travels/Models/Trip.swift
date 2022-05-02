@@ -20,11 +20,13 @@ class Trip: NSObject, MKAnnotation{
     var postingUserID: String
     var departureDate: Date
     var returnDate: Date
+    var index: Int
     var documentID: String
+    
     var dictionary: [String: Any] {
         let departureTimeIntervalDate = departureDate.timeIntervalSince1970
         let returnTimeIntervalDate = departureDate.timeIntervalSince1970
-        return ["name" : name , "address": address, "latitude": latitude, "longitude": longitude, "numberOfLocations": numberOfLocations, "numberOfItems": numberOfItems, "departureDate": departureTimeIntervalDate,"returnDate": returnTimeIntervalDate, "postingUserID" : postingUserID]
+        return ["name" : name , "address": address, "latitude": latitude, "longitude": longitude, "numberOfLocations": numberOfLocations, "numberOfItems": numberOfItems, "departureDate": departureTimeIntervalDate,"returnDate": returnTimeIntervalDate, "index": index, "postingUserID" : postingUserID]
     }
     
     var longitude: CLLocationDegrees {
@@ -48,11 +50,11 @@ class Trip: NSObject, MKAnnotation{
     
     
     convenience override init() {
-        self.init(name: "", address: "", coordinate: CLLocationCoordinate2D(), numberOfLocations: 0 , numberOfItems: 0 , departureDate: Date(), returnDate: Date(), postingUserID: "", documentID: "")
+        self.init(name: "", address: "", coordinate: CLLocationCoordinate2D(), numberOfLocations: 0 , numberOfItems: 0 , departureDate: Date(), returnDate: Date(), index: 0, postingUserID: "", documentID: "")
     }
     
     convenience init(name: String, departureDate: Date, returnDate: Date) {
-        self.init(name: name, address: "", coordinate: CLLocationCoordinate2D(), numberOfLocations: 0 , numberOfItems: 0 , departureDate: departureDate , returnDate: returnDate, postingUserID: "", documentID: "")
+        self.init(name: name, address: "", coordinate: CLLocationCoordinate2D(), numberOfLocations: 0 , numberOfItems: 0 , departureDate: departureDate , returnDate: returnDate, index: 0, postingUserID: "", documentID: "")
     }
     
     convenience init(dictionary: [String: Any]) {
@@ -63,7 +65,7 @@ class Trip: NSObject, MKAnnotation{
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let numberOfLocations = dictionary["numberOfLocations"] as! Int? ?? 0
         let numberOfItems = dictionary["numberOfItems"] as! Int? ?? 0
-        
+        let index = dictionary["index"] as! Int? ?? 0
         let departureTimeIntervalDate = dictionary["departureDate"] as! TimeInterval? ??  TimeInterval()
         let departureDate = Date(timeIntervalSince1970: departureTimeIntervalDate)
         let returnTimeIntervalDate = dictionary["returnDate"] as! TimeInterval? ??  TimeInterval()
@@ -72,10 +74,10 @@ class Trip: NSObject, MKAnnotation{
         
         
         
-        self.init(name: name, address: address, coordinate: coordinate, numberOfLocations: numberOfLocations, numberOfItems: numberOfItems ,departureDate:departureDate, returnDate:returnDate, postingUserID: postingUserID, documentID: "")
+        self.init(name: name, address: address, coordinate: coordinate, numberOfLocations: numberOfLocations, numberOfItems: numberOfItems ,departureDate:departureDate, returnDate:returnDate, index: index, postingUserID: postingUserID, documentID: "")
     }
     
-    init(name: String, address: String, coordinate: CLLocationCoordinate2D,  numberOfLocations: Int, numberOfItems: Int, departureDate: Date, returnDate: Date, postingUserID: String, documentID: String){
+    init(name: String, address: String, coordinate: CLLocationCoordinate2D,  numberOfLocations: Int, numberOfItems: Int, departureDate: Date, returnDate: Date, index: Int, postingUserID: String, documentID: String){
         self.name = name
         self.address = address
         self.coordinate = coordinate
@@ -83,6 +85,7 @@ class Trip: NSObject, MKAnnotation{
         self.numberOfItems = numberOfItems
         self.departureDate = departureDate
         self.returnDate = returnDate
+        self.index = index
         self.postingUserID = postingUserID
         self.documentID = documentID
         
@@ -127,7 +130,7 @@ class Trip: NSObject, MKAnnotation{
     
     func deleteData(user: TravelUser, trip: Trip, completion: @escaping (Bool) -> ()) {
         let db = Firestore.firestore()
-        db.collection("users").document(user.documentID).collection("trips").document(trip.documentID).collection("locations").document(documentID).delete() { error in
+        db.collection("users").document(user.documentID).collection("trips").document(trip.documentID).delete() { error in
             if let error = error {
                 print("Error: deleting review \(self.documentID)")
                 completion(false)
@@ -136,5 +139,7 @@ class Trip: NSObject, MKAnnotation{
             }
         }
     }
+    
+
 }
 

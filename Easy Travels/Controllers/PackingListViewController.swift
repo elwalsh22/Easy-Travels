@@ -9,7 +9,8 @@ import UIKit
 
 class PackingListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var itemLabel: UILabel!
+ 
+    @IBOutlet weak var packingReminderLabel: UILabel!
     var items: PackingItems!
     var trip: Trip!
     var user: TravelUser!
@@ -31,6 +32,9 @@ class PackingListViewController: UIViewController {
 
         }
         items.loadData(user: user, trip: trip) {
+            if self.items.itemsArray.count != 0 {
+                self.packingReminderLabel.isHidden = true
+            }
             self.tableView.reloadData()
         }
     }
@@ -58,7 +62,7 @@ class PackingListViewController: UIViewController {
         }
     }
     
-    @IBAction func unwindtoPackingListViewController(segue: UIStoryboardSegue) {
+    @IBAction func unwindFromPackingDetailViewController(segue: UIStoryboardSegue) {
         self.tableView.reloadData()
         
     }
