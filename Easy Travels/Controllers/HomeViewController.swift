@@ -115,7 +115,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.day]
         formatter.unitsStyle = .spellOut
-        cell.textLabel?.text = trips.tripArray[indexPath.row].name
+        cell.textLabel?.text = "\(trips.tripArray[indexPath.row].name)"
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium

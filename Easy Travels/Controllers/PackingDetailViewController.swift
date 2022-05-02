@@ -47,6 +47,7 @@ class PackingDetailViewController: UIViewController {
         
         itemTextField.text = item.itemName
         quantityTextField.text = "\(item.quantity )"
+        stepper.value = Double(item.quantity)
         
     }
     func updateFromUserInterface() {
