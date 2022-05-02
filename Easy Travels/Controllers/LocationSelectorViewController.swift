@@ -23,6 +23,7 @@ class LocationSelectorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getLocation()
         
         if trip == nil {
             trip = Trip()
@@ -162,9 +163,14 @@ extension LocationSelectorViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+        guard trip.address == "" else {
+            return
+        }
+        
         print("updating location")
         let currentLocation = locations.last ?? CLLocation()
         print("current location is \(currentLocation.coordinate.longitude) \(currentLocation.coordinate.latitude)")
+        
         var name = ""
         var address = ""
         let geocoder = CLGeocoder()
@@ -182,6 +188,9 @@ extension LocationSelectorViewController: CLLocationManagerDelegate {
                 }
             } else {
                 print("ERROR retreiving placemark . Error Code: \(error?.localizedDescription)")
+            }
+            if self.trip.address == "" {
+                self.trip.coordinate = currentLocation.coordinate
             }
             
 //            if self.spot.name == "" && self.spot.address == "" {

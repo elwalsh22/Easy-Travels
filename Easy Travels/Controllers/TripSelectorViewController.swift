@@ -40,7 +40,7 @@ class TripSelectorViewController: UIViewController {
     @IBAction func tripNameChanged(_ sender: UITextField) {
         let noSpaces = tripNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         if noSpaces != "" {
-            canSegue = true
+            errorLabel.isHidden = true
         } else {
             errorLabel.text = "please give your trip a name to continue"
         }
@@ -48,6 +48,13 @@ class TripSelectorViewController: UIViewController {
     }
     @IBAction func departureChanged(_ sender: UIDatePicker) {
         print("departure date: \(departureDatePicker.date)")
+        if returnDatePicker.date <= departureDatePicker.date {
+            canSegue = false
+            errorLabel.text = "please make your return date later than your departure"
+            errorLabel.isHidden = false
+        } else {
+            errorLabel.isHidden = true
+        }
         
     }
     
@@ -58,6 +65,9 @@ class TripSelectorViewController: UIViewController {
         if returnDatePicker.date <= departureDatePicker.date {
             canSegue = false
             errorLabel.text = "please make your return date later than your departure"
+            errorLabel.isHidden = false
+        } else {
+            errorLabel.isHidden = true
         }
         
     }
@@ -79,7 +89,8 @@ class TripSelectorViewController: UIViewController {
     
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
-        if returnDatePicker.date > departureDatePicker.date {
+       
+                if returnDatePicker.date > departureDatePicker.date && tripNameTextField.text != "" {
             canSegue = true
         }
         trip.name = tripNameTextField.text!

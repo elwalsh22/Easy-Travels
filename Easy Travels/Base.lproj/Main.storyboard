@@ -171,7 +171,8 @@
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dtt-7N-PDS">
                                 <rect key="frame" x="117.33333333333334" y="173" width="256.66666666666663" height="34"/>
-                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="Color3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="3JW-PE-NOb"/>
                                 </constraints>
@@ -494,7 +495,7 @@
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1o-W9-LrT">
                                 <rect key="frame" x="117" y="137" width="257" height="34"/>
-                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="d2U-PN-aas"/>
                                 </constraints>
@@ -508,7 +509,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KBc-Pi-7U2">
                                 <rect key="frame" x="117" y="195" width="145" height="34"/>
-                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="bar-pL-b51"/>
                                 </constraints>
